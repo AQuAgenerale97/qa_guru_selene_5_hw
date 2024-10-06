@@ -9,6 +9,8 @@ def test_fill_student_registration_form_and_check_pop_up():
     и проверку заполненных данных в поп-апе
     """
     browser.open('/automation-practice-form')
+    browser.driver.execute_script("$('#fixedban').remove()")
+    browser.driver.execute_script("$('footer').remove()")
 
     browser.element('#firstName').should(be.blank).type('Alexander')
     browser.element('#lastName').should(be.blank).type('Ivanov')
