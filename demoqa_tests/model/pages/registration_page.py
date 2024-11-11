@@ -2,7 +2,6 @@
 from demoqa_tests import resource
 from selene import browser, have, be
 
-from demoqa_tests.data.hobbies_dictionary import hobbies_dict
 from demoqa_tests.data.users import User
 
 
@@ -93,9 +92,9 @@ class RegistrationPage:
             self.subject_picker.element(f"//*[text()='{student_subject}']").click()
         return self
 
-    def choose_hobbies(self, student_hobbies: tuple):
-        for student_hobby in student_hobbies:
-            browser.element(f'label[for="hobbies-checkbox-{hobbies_dict[student_hobby]}"]').click()
+    def choose_hobbies(self, student_hobbies: dict):
+        for key, value in student_hobbies.items():
+            browser.element(f'label[for="hobbies-checkbox-{value}"]').click()
         return self
 
     def upload_picture(self, path: str):

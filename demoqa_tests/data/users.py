@@ -10,7 +10,7 @@ class User:
     phone_number: str
     date_of_birth: dict[str, str]
     subjects: ()
-    hobbies: ()
+    hobbies: dict[str, int]
     upload_file_name: str
     current_address: str
     state: str
@@ -25,7 +25,7 @@ student_1 = User(
     phone_number='9645120774',
     date_of_birth={"day": '12', "month": 'April', "year": '1997'},
     subjects=('Maths', 'English'),
-    hobbies=('Sports', 'Reading'),
+    hobbies={'Sports': 1, 'Reading': 2},
     upload_file_name='SI.jpg',
     current_address='Moscow, Red Square, h. 1',
     state='Haryana',
