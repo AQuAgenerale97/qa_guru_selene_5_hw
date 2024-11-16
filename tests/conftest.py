@@ -50,6 +50,6 @@ def browser_management(load_env):
     attach.add_screenshot(browser)
     attach.add_logs(browser)
     attach.add_html(browser)
-    attach.add_video(browser, selenoid_url=None)
+    attach.add_video(browser, selenoid_url)
 
     browser.quit()

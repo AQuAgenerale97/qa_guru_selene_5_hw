@@ -4,7 +4,6 @@ import allure
 from allure_commons.types import AttachmentType
 
 
-
 # Скриншоты
 def add_screenshot(browser):
     png = browser.driver.get_screenshot_as_png()
