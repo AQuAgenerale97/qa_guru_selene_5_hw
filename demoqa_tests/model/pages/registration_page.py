@@ -1,3 +1,4 @@
+import allure
 
 from demoqa_tests import resource
 from selene import browser, have, be
@@ -36,12 +37,14 @@ class RegistrationPage:
         self.table_student_address = browser.element('//table//td[text()="Address"]/../td[2]')
         self.table_student_state_and_city = browser.element('//table//td[text()="State and City"]/../td[2]')
 
+    @allure.step('Open registration form')
     def open(self):
         browser.open(self.registration_page_url)
         browser.driver.execute_script("$('#fixedban').remove()")
         browser.driver.execute_script("$('footer').remove()")
         return self
 
+    @allure.step('Fill the user registration form and submit result')
     def register(self, user: User):
         self.fill_first_name(user.first_name)
         self.fill_last_name(user.last_name)
@@ -57,26 +60,32 @@ class RegistrationPage:
         self.choose_city(user.city)
         self.submit()
 
+    @allure.step('Fill first name')
     def fill_first_name(self, value):
         self.first_name_input.should(be.blank).type(value)
         return self
 
+    @allure.step('Fill last name')
     def fill_last_name(self, value):
         self.last_name_input.should(be.blank).type(value)
         return self
 
+    @allure.step('Fill email')
     def fill_email(self, value):
         self.email_input.should(be.blank).type(value)
         return self
 
+    @allure.step('Fill gender')
     def choose_gender(self, gender_name):
         self.gender_picker.element_by(have.value(f'{gender_name}')).element('..').click()
         return self
 
+    @allure.step('Fill phone_number')
     def fill_phone_number(self, value):
         self.phone_number_input.should(be.blank).type(value)
         return self
 
+    @allure.step('Fill birthday')
     def fill_date_of_birth(self, year, month, day):
         self.date_of_birth_input.click()
         self.month_of_birth.type(month)
@@ -86,39 +95,47 @@ class RegistrationPage:
         ).click()
         return self
 
+    @allure.step('Fill subjects')
     def fill_subjects(self, student_subjects: tuple):
         for student_subject in student_subjects:
             self.subject_input.type(student_subject[0].lower())
             self.subject_picker.element(f"//*[text()='{student_subject}']").click()
         return self
 
+    @allure.step('Fill hobbies')
     def choose_hobbies(self, student_hobbies: dict):
         for key, value in student_hobbies.items():
             browser.element(f'label[for="hobbies-checkbox-{value}"]').click()
         return self
 
+    @allure.step('Upload picture')
     def upload_picture(self, path: str):
         self.picture_uploader.set_value(resource.path(path))
         return self
 
+    @allure.step('Fill current_address')
     def fill_current_address(self, value):
         self.address_input.type(value)
         return self
 
+    @allure.step('Fill state')
     def choose_state(self, value):
         self.state_input.click()
         browser.element(f'//*[text()="{value}"]').click()
         return self
 
+    @allure.step('Choose city')
     def choose_city(self, value):
         self.city_input.click()
         browser.element(f'//*[text()="{value}"]').click()
         return self
 
+    @allure.step('Submit form')
     def submit(self):
         self.submit_button.click()
         return self
 
+    @allure.step('User should be registered with his data')
     def should_registered_user_with(self, user: User):
 
         full_name = user.first_name + ' ' + user.last_name
