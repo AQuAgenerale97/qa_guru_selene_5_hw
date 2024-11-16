@@ -11,7 +11,7 @@ from demoqa_tests.model.pages.registration_page import RegistrationPage
 @allure.title('Autotest with allure for demoqa registration form')
 @allure.feature('Registration form')
 @allure.story('User fill the registration form')
-@allure.link('https://demoqa.com/', name='Registration form testing')
+@allure.link('https://demoqa.com/automation-practice-form', name='Registration form testing')
 def test_fill_student_registration_form_and_check_pop_up():
     """
     Автотест на полное заполнение и отправку формы https://demoqa.com/automation-practice-form
