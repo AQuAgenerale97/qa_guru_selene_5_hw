@@ -14,9 +14,19 @@ def load_env():
     load_dotenv()
 
 
+def pytest_addoption(parser):
+    parser.addoption(
+        '--browser_version',
+        help='Версия браузера, в котором будут запускать тесты',
+        default='100.0'
+    )
+
+
 @pytest.fixture(scope='function', autouse=True)
-def browser_management(load_env):
+def browser_management(load_env, request):
     print("Browser_management fixture is used")
+
+    browser_version = request.config.getoption('--browser_version')
 
     selenoid_login = os.getenv("SELENOID_LOGIN")
     selenoid_pass = os.getenv("SELENOID_PASS")
@@ -28,8 +38,8 @@ def browser_management(load_env):
 
     options = Options()
     selenoid_capabilities = {
-        "browserName": "chrome",
-        "browserVersion": "100.0",
+        "browserName": 'chrome',
+        "browserVersion": browser_version,
         "selenoid:options": {
             "enableVNC": True,
             "enableVideo": True
